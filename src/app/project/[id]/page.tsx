@@ -13,7 +13,7 @@ export default function TaskBoard() {
     useEffect(() => {
         const fetchTasks = async () => {
             const token = localStorage.getItem('token');
-            const { data } = await axios.get(`/api/tasks?projectId=${id}`, {
+            const { data } = await axios.get(`${process.env.NEXT_PUBLIC_API}/tasks?projectId=${id}`, {
                 headers: { Authorization: `Bearer ${token}` },
             });
             setTasks(data);
