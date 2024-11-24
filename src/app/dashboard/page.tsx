@@ -12,6 +12,7 @@ export default function Dashboard() {
     const [showModal, setShowModal] = useState(false);
     const [newProject, setNewProject] = useState({ name: "", description: "" });
     const [userRole, setUserRole] = useState(null);
+    const [name, setName] = useState(null);
     const router = useRouter();
 
     useEffect(() => {
@@ -21,7 +22,9 @@ export default function Dashboard() {
 
             try {
                 const decoded = jwtDecode(token);
+                console.log("decoded",decoded)
                 setUserRole(decoded?.role);
+                setName(decoded?.id);
                 const { data } = await axios.get(
                     `${process.env.NEXT_PUBLIC_API}/projects`,
                     {
@@ -42,9 +45,14 @@ export default function Dashboard() {
     const handleCreateProject = async () => {
         const token = localStorage.getItem("token");
         try {
+            console.log("name",name)
             const { data } = await axios.post(
                 `${process.env.NEXT_PUBLIC_API}/projects`,
-                newProject,
+                {
+                   name: newProject.name, // Add project name
+              description: newProject.description, // Add other fields as needed
+                   createdBy:name            
+                },
                 {
                     headers: { Authorization: `Bearer ${token}` },
                 }
