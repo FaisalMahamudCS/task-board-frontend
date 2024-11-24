@@ -35,7 +35,7 @@ export default function TaskBoard() {
         });
 
         return () => socket.disconnect();
-    }, [id]);
+    }, [id, socket]);
 
     const updateTaskStatus = async (taskId, status) => {
         const token = localStorage.getItem("token");
