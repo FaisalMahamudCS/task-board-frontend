@@ -13,10 +13,10 @@ export default function SignUp() {
     const handleSignUp = async (e) => {
         e.preventDefault();
         try {
-            const userData = { email, password, name };
-            const { data } = await axios.post(`${process.env.NEXT_PUBLIC_API}/signup`, userData);
-            localStorage.setItem('token', data.token);  // Save token if returned from the backend
-            router.push('/dashboard'); // Redirect to dashboard or home page after successful sign-up
+            const userData = { email, password, username:name };
+            const { data } = await axios.post(`${process.env.NEXT_PUBLIC_API}/auth/signup`, userData);
+            localStorage.setItem('token', data.token);  
+            router.push('/dashboard'); 
         } catch (err) {
             console.log(err);
             setError('Signup failed. Please try again.');

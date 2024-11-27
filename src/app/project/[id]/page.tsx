@@ -109,7 +109,7 @@ export default function TaskBoard() {
 
         try {
             await axios.patch(
-                `${process.env.NEXT_PUBLIC_API}/tasks/${taskId}/comment`,
+                `${process.env.NEXT_PUBLIC_API}/tasks/${taskId}/comments`,
                 { comment },
                 { headers: { Authorization: `Bearer ${token}` } }
             );

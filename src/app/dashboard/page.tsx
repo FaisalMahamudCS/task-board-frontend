@@ -33,6 +33,7 @@ export default function Dashboard() {
                 );
                 setProjects(data);
             } catch (err) {
+                console.log("err",err)
                 setError("Failed to load projects. Redirecting...");
                 setTimeout(() => router.push("/login"), 2000);
             } finally {
